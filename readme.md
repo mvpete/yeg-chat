@@ -52,6 +52,7 @@ __2. Function Codes__
 ```
 
 __3. Interaction__
+
     The client initiates the connection with the server, and sends a message
     containing exactly the length of the username, and the ASCII username
     in the message
