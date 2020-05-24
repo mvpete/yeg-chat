@@ -1,5 +1,6 @@
-yeg-cpp-chat specification                          May 2020
+yeg-cpp-chat specification                          
 ===
+May 2020
 
 Author: Peter Lorimer
 
