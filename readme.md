@@ -41,13 +41,13 @@ Abstract
     string := <unsigned short len> [ ascii characters ]
 
 2. Function Codes
-
+```
     0x0001 - Hello World! 
     0x0002 - Broadcast message
     0x0003 - Receive broadcast
 
     0xFFFF - Error
-
+```
 
 3. Interaction
     The client initiates the connection with the server, and sends a message
