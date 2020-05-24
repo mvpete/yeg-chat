@@ -12,7 +12,7 @@ Abstract
     with network programming and asynchronous IO. It is by no means free of error. It is a
     simple binary protocol defined as follows.
 
-1. Overview
+__1. Overview__
 
     It's simple, the yeg-chat is a simple centralized chat service, whereby there is a single 
     server serving N clients. When a client connects, they handshake with the server, and they
@@ -41,7 +41,8 @@ Abstract
 
     string := <unsigned short len> [ ascii characters ]
 
-2. Function Codes
+__2. Function Codes__
+
 ```
     0x0001 - Hello World! 
     0x0002 - Broadcast message
@@ -50,7 +51,7 @@ Abstract
     0xFFFF - Error
 ```
 
-3. Interaction
+__3. Interaction__
     The client initiates the connection with the server, and sends a message
     containing exactly the length of the username, and the ASCII username
     in the message
@@ -79,11 +80,11 @@ A user sends a message by sending a 0x0002 FC, followed by the length of the mes
 The message is then broadcast to all connected users, with the 0x0003 FC, the packet will contain a 2 byte
 total length. Following the length, a string username, and a string message.
 
-4. Building
+__4. Building__
 
 On Windows, build the solution using /std:c++17 with Visual Studio 2019 (Version 16.4.2).
 
-5. To Run
+__5. To Run__
 
 ./yeg-chat-server
 
