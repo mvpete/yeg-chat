@@ -18,7 +18,7 @@ Abstract
     are then able to send messages to the group, or to direct message (dm) users individually.
 
     Messages are in the format of:
-
+```
     0               1               2               3               4 
     0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0
     +---------------------------------------------------------------+
@@ -30,7 +30,7 @@ Abstract
     |                           Message                             |
     |                                                               |
     +---------------------------------------------------------------+
-
+```
 
 
     Each packet is identified with a signature, followed directly by a 2-byte Function Code, 
