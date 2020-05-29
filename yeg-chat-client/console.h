@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+#ifdef __unix__
+#include <ncurses.h>
+#endif
 
 
 namespace yegcpp
@@ -22,8 +25,11 @@ namespace yegcpp
     };
     namespace impl
     {
-#ifdef WINDOWS
+#ifdef _WIN64
         using handle = HANDLE;
+#else
+        using handle = decltype(stdscr);
+#endif
         handle get_stdout();
         handle get_stdin();
         void close_handle(handle);
@@ -32,8 +38,6 @@ namespace yegcpp
         void set_cursor_pos(handle, pos);
         void write_console(handle, const char *buf, size_t len, pos p, unsigned long *written);
         char get_char();
-#elif
-#endif
     }
 
     class console
