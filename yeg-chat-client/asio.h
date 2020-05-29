@@ -1,7 +1,7 @@
 #ifndef __asio_h__
 #define __asio_h__
-#define WINDOWS 1
-#ifdef WINDOWS
+
+#ifdef _WIN64
 #include <WinSock2.h>
 #endif
 

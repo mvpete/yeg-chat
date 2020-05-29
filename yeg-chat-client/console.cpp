@@ -3,9 +3,14 @@
 
 using namespace yegcpp;
 
-#ifdef WINDOWS
+#ifdef _WIN64
+
 #include <conio.h>
 #include <consoleapi2.h>
+
+#define ENTER '\r'
+#define BACKSPACE 0x08
+
 yegcpp::impl::handle yegcpp::impl::get_stdout()
 {
    return GetStdHandle(STD_OUTPUT_HANDLE);
@@ -58,9 +63,65 @@ char yegcpp::impl::get_char()
 {
     return _getch();
 }
+#else
+
+#include <ncurses.h>
+
+#define ENTER '\n'
+#define BACKSPACE 0x7f
+
+
+yegcpp::impl::handle yegcpp::impl::get_stdout()
+{
+    initscr();
+    return stdscr;
+}
+
+yegcpp::impl::handle yegcpp::impl::get_stdin()
+{
+    // curs_set(0);
+    return stdscr;
+}
+
+void yegcpp::impl::close_handle(handle h)
+{
+//   curs_set(1);
+  endwin();
+}
+
+void yegcpp::impl::disable_echo(handle h)
+{
+    noecho();
+}
+
+pos yegcpp::impl::get_cursor_pos(handle h)
+{
+    short int x,y;
+    getyx(h, y, x);
+    return pos{x, y};
+}
+
+void yegcpp::impl::set_cursor_pos(handle h, pos cpos)
+{
+    move(cpos.y, cpos.x);
+}
+
+void yegcpp::impl::write_console(handle h, const char *buf, size_t len, pos p, unsigned long *written)
+{
+    move(p.y, p.x);
+    for(int i=0; i<len; ++i) {
+      addch(buf[i]);
+    }
+    addch(' ');
+    written += len;
+    refresh();
+}
+
+char yegcpp::impl::get_char()
+{
+    return getch();
+}
 #endif
-
-
 
 
 console::console(net::io_context &ctx, const std::string &prompt)
@@ -87,12 +148,12 @@ void console::async_read_line(line_handler h)
         while (true)
         {
             char c = impl::get_char();
-            if (c == '\r')
+            if (c == ENTER)
             {
                 clear_rbuf_out();
                 break;
             }
-            if (c == 0x08)
+            if (c == BACKSPACE)
             {
                 if (rbuf_.size() > 0)
                 {
