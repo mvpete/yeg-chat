@@ -25,7 +25,7 @@ namespace yegcpp
     };
     namespace impl
     {
-#ifdef _WIN64
+#ifdef _WIN32
         using handle = HANDLE;
 #else
         using handle = decltype(stdscr);

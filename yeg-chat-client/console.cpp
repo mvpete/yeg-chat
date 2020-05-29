@@ -3,7 +3,7 @@
 
 using namespace yegcpp;
 
-#ifdef _WIN64
+#ifdef _WIN32
 
 #include <conio.h>
 #include <consoleapi2.h>
