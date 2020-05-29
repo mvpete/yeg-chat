@@ -8,8 +8,8 @@ using namespace yegcpp;
 #include <conio.h>
 #include <consoleapi2.h>
 
-#define ENTER '\r'
-#define BACKSPACE 0x08
+constexpr auto ENTER = '\r';
+constexpr auto BACKSPACE = 0x08;
 
 yegcpp::impl::handle yegcpp::impl::get_stdout()
 {
